@@ -299,6 +299,10 @@ describe OAuth2::Client do
     expect(subject.implicit).to be_kind_of(OAuth2::Strategy::Implicit)
   end
 
+  it 'instantiates a JWT Bearer strategy with this client' do
+    expect(subject.jwt_bearer).to be_kind_of(OAuth2::Strategy::JWTBearer)
+  end
+
   context 'with SSL options' do
     subject do
       cli = OAuth2::Client.new('abc', 'def', :site => 'https://api.example.com', :ssl => {:ca_file => 'foo.pem'})
