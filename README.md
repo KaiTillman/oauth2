@@ -72,7 +72,7 @@ Response instance will contain the OAuth2::Error instance.
 ## Authorization Grants
 Currently the Authorization Code, Implicit, Resource Owner Password Credentials, Client Credentials, and Assertion
 authentication grant types have helper strategy classes that simplify client
-use.  They are available via the #auth_code, #implicit, #password, #client_credentials, and #assertion methods respectively.
+use.  They are available via the #auth_code, #implicit, #password, #client_credentials, #assertion, and #jwt_bearer methods respectively.
 
 ```ruby
 auth_url = client.auth_code.authorize_url(:redirect_uri => 'http://localhost:8080/oauth/callback')
@@ -87,6 +87,8 @@ token = client.password.get_token('username', 'password')
 token = client.client_credentials.get_token
 
 token = client.assertion.get_token(assertion_params)
+
+token = client.jwt_bearer.get_token(assertion_params)
 ```
 
 If you want to specify additional headers to be sent out with the

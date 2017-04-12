@@ -48,6 +48,18 @@ module OAuth2
         @client.get_token(hash, opts.merge('refresh_token' => nil))
       end
 
+      # Build the request for an access token
+      #
+      # @param [Hash] params jwt_bearer params
+      # pass either :hmac_secret or :private_key, but not both.
+      #
+      #   params :hmac_secret, secret string.
+      #   params :private_key, private key string.
+      #
+      #   params :iss, issuer
+      #   params :aud, audience, optional
+      #   params :sub, principal, current user
+      #   params :exp, expired at, in seconds, like Time.now.utc.to_i + 3600
       def build_request(params)
         assertion = build_assertion(params)
         {
@@ -57,6 +69,18 @@ module OAuth2
         }
       end
 
+      # Build the JWT used as the authorization assertion
+      #
+      # @param [Hash] params jwt_bearer params
+      # pass either :hmac_secret or :private_key, but not both.
+      #
+      #   params :hmac_secret, secret string.
+      #   params :private_key, private key string.
+      #
+      #   params :iss, issuer
+      #   params :aud, audience, optional
+      #   params :sub, principal, current user
+      #   params :exp, expired at, in seconds, like Time.now.utc.to_i + 3600
       def build_assertion(params)
         claims = {
           :iss => params[:iss],
