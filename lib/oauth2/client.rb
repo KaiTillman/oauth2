@@ -183,6 +183,13 @@ module OAuth2
       @assertion ||= OAuth2::Strategy::Assertion.new(self)
     end
 
+    # The JWT Bearer Stategy
+    #
+    # @see https://tools.ietf.org/html/rfc7523
+    def jwt_bearer
+      @jwt_bearer ||= OAuth2::Strategy::JWTBearer.new(self)
+    end
+
     # The redirect_uri parameters, if configured
     #
     # The redirect_uri query parameter is OPTIONAL (though encouraged) when
